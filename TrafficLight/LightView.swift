@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LightView: View {
     let color: Color
+    let opacity: Double
+    let shine: Double
     
     var body: some View {
         
@@ -16,11 +18,13 @@ struct LightView: View {
             .foregroundColor(color)
             .frame(width: 120)
             .overlay(Circle().stroke(Color.white, lineWidth: 4))
+            .opacity(opacity)
+            .shadow(color: color, radius: shine)
     }
 }
 
 struct LightView_Previews: PreviewProvider {
     static var previews: some View {
-        LightView(color: .red)
+        LightView(color: .red, opacity: 1.0, shine: 0)
     }
 }

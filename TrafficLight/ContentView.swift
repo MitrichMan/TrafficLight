@@ -12,12 +12,6 @@ struct ContentView: View {
         case none, red, yellow, green
     }
     
-    private let lightOn = 1.0
-    private let lightOff = 0.3
-    
-    private let shineOn = 20.0
-    private let shineOff = 0.0
-            
     @State private var currentLight = CurrentLight.none
     
     @State private var redLightState = 0.3
@@ -27,38 +21,50 @@ struct ContentView: View {
     @State private var redLightShine = 0.0
     @State private var yellowLightShine = 0.0
     @State private var greenLightShine = 0.0
-        
+    
     @State private var buttonText = "Start"
     
+    private let lightOn = 1.0
+    private let lightOff = 0.3
+    
+    private let shineOn = 20.0
+    private let shineOff = 0.0
+            
     var body: some View {
         ZStack {
             Color(.black)
                 .ignoresSafeArea()
             VStack {
-                LightView(color: .red)
+                LightView(
+                    color: .red,
+                    opacity: redLightState,
+                    shine: redLightShine
+                )
                     .padding(.top, 16)
-                    .opacity(redLightState)
-                    .shadow(color: .red, radius: redLightShine)
-                LightView(color: .yellow)
+                    
+                
+                LightView(
+                    color: .yellow,
+                    opacity: yellowLightState,
+                    shine: yellowLightShine
+                )
                     .padding(.top, 16)
-                    .opacity(yellowLightState)
-                    .shadow(color: .yellow, radius: yellowLightShine)
-                LightView(color: .green)
+            
+                
+                LightView(
+                    color: .green,
+                    opacity: greenLightState,
+                    shine: greenLightShine
+                )
                     .padding(.top, 16)
-                    .opacity(greenLightState)
-                    .shadow(color: .green, radius: greenLightShine)
+                
                 Spacer()
-                Button(action: startButtonTapped) {
-                    Text(buttonText)
-                        .foregroundColor(.white)
-                        .font(.largeTitle)
-                }
-                .tint(.blue)
-                .frame(width: 200, height: 50)
-                .background(Capsule().stroke(.white, lineWidth: 4))
-                .background(Capsule().foregroundColor(.blue))
+                ButtonView(
+                    buttonText: buttonText,
+                    action: startButtonTapped
+                )
+                    .padding()
             }
-            .padding()
         }
     }
     
